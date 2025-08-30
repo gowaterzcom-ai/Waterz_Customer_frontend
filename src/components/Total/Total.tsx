@@ -191,7 +191,7 @@ const Total: React.FC = () => {
                     try {
                         dispatch(setLoading(true));
                         const token = localStorage.getItem('token');
-                        await axios.post('https://www.backend.wavezgoa.com/payment/verify', 
+                        await axios.post('https://www.backend.gowaterz.com/payment/verify', 
                             {
                                 paymentDetails: {
                                     razorpay_order_id: response.razorpay_order_id,
@@ -669,4 +669,5 @@ export default Total;
 // };
 
 // export default Total;
+
 
