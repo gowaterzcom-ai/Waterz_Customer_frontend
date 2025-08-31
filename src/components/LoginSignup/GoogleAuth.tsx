@@ -9,7 +9,7 @@ interface GoogleAuthButtonProps {
 const GoogleAuthButton: React.FC<GoogleAuthButtonProps> = ({ text }) => {
   const handleGoogleAuth = () => {
     const currentOrigin = window.location.origin;
-    window.location.href = `https://www.backend.wavezgoa.com/auth/google?redirect_uri=${encodeURIComponent(currentOrigin)}`;
+    window.location.href = `https://www.backend.gowaterz.com/auth/google?redirect_uri=${encodeURIComponent(currentOrigin)}`;
   };
 
   return (
