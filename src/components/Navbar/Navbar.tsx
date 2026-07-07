@@ -85,36 +85,46 @@ const Navbar: React.FC = () => {
   );
 
   return (
-    <div className={styles.comp_body}>
+    <header className={styles.comp_body}>
       <div className={styles.content}>
         <div className={styles.brand}>
           <Link to="/">
             {/* <div className={styles.logobox}> */}
-                <img src={logo} width="100%" style={{paddingTop:"8px"}} />
+                <img src={logo} width="100%" style={{paddingTop:"8px"}} alt="GoWaterz home" />
             {/* </div> */}
           </Link>
         </div>
 
         {/* Desktop Navigation */}
-        <div className={styles.desktop_nav}>{navItems}</div>
+        <nav className={styles.desktop_nav} aria-label="Main">{navItems}</nav>
 
         {/* Hamburger icon for mobile */}
-        <div 
+        <div
           ref={hamburgerRef}
-          className={styles.hamburger} 
+          className={styles.hamburger}
           onClick={toggleMenu}
+          role="button"
+          tabIndex={0}
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
+          aria-expanded={menuOpen}
+          onKeyDown={(e) => {
+            if (e.key === "Enter" || e.key === " ") {
+              e.preventDefault();
+              toggleMenu();
+            }
+          }}
         >
-          <span>&#9776;</span>
+          <span aria-hidden="true">&#9776;</span>
         </div>
       </div>
 
       {/* Mobile Navigation Menu */}
       {menuOpen && (
-        <div ref={menuRef} className={styles.mobile_menu}>
+        <nav ref={menuRef} className={styles.mobile_menu} aria-label="Mobile">
           {navItems}
-        </div>
+        </nav>
       )}
-    </div>
+    </header>
   );
 };
 

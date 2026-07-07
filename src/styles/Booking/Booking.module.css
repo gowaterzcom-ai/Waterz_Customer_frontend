@@ -108,3 +108,32 @@
     width: 300px !important;
     min-width: 300px !important;
 }
+
+@media (max-width: 768px){
+    .comp_body{
+        margin: 6rem 0 1rem 0;
+    }
+    .hero_head{
+        font-size: 34px;
+        line-height: 42px;
+    }
+    .section_head{
+        font-size: 26px;
+        line-height: 34px;
+    }
+    .section_head2{
+        font-size: 18px;
+        line-height: 24px;
+    }
+}
+
+@media (max-width: 480px){
+    .hero_head{
+        font-size: 28px;
+        line-height: 36px;
+    }
+    .section_head{
+        font-size: 22px;
+        line-height: 29px;
+    }
+}

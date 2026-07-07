@@ -1,10 +1,10 @@
 import React from "react";
 import styles from "../../styles/Choose/Choose.module.css";
 import YachtCard from "../Layouts/YatchCard";
+import ErrorBoundary from "../ErrorBoundary";
 import { useYachts } from "../../hooks/useYachts";
 // import { useLocation } from "react-router-dom";
 // import { Yacht } from "../../types/yachts";
-import { toast } from "react-toastify";
 
 // interface LocationState {
 //     yachts: Yacht[];
@@ -13,7 +13,7 @@ import { toast } from "react-toastify";
 const Choose: React.FC = (yacht) => {
   // const location = useLocation();
   // const state = (location.state as LocationState) || null;
-  const { yachts: hookYachts, error } = useYachts();
+  const { yachts: hookYachts } = useYachts();
 
   // Determine which yachts to display.
   // If ideal yachts were returned and are non-empty, use them.
@@ -24,10 +24,6 @@ const Choose: React.FC = (yacht) => {
   console.log("idealYacht", idealYachts?.length)
   const filterEmpty = idealYachts && idealYachts.length === 0;
   const displayedYachts = idealYachts && idealYachts.length > 0 ? idealYachts : hookYachts;
-
-  if (error) {
-    toast.error("Something Wrong Happened")
-  }
 
   return (
     <div className={styles.comp_body}>
@@ -51,7 +47,9 @@ const Choose: React.FC = (yacht) => {
       <div className={styles.yachtGrid}>
         {/* @ts-ignore */}
         {displayedYachts?.map((yacht) => (
-          <YachtCard showLoc={filterEmpty} key={yacht._id} yacht={yacht} />
+          <ErrorBoundary key={yacht._id}>
+            <YachtCard showLoc={filterEmpty} yacht={yacht} />
+          </ErrorBoundary>
         ))}
       </div>
     </div>

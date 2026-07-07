@@ -1,16 +1,17 @@
 import React from "react";
 import styles from "../../styles/Home/Home.module.css";
 import YachtCard from "../Layouts/YatchCard";
+import ErrorBoundary from "../ErrorBoundary";
 import hh1 from "../../assets/Home/hh1.svg";
 import hh2 from "../../assets/Home/hh2.svg";
 import hh3 from "../../assets/Home/hh3.svg";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { Autoplay } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import SolutionCard from "../Layouts/SolutionCard";
 import EventCard from "../Layouts/EventCard";
 import { useTopYachts } from "../../hooks/useTopYacht";
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 import sunset from "../../assets/Yatch/sunset.jpg";
 import adventure from "../../assets/Yatch/adventure.jpg";
 import corporate from "../../assets/Yatch/corporate.jpg";
@@ -84,21 +85,7 @@ const eventData = [
 ];
 
 const Home: React.FC = () => {
-  const { yachts,  error } = useTopYachts();
-
-  // if (loading) {
-  //   return (
-  //     <div className={styles.comp_body}>
-  //       <div className={styles.hero_body}>
-  //         <div><Loader1/></div>
-  //       </div>
-  //     </div>
-  //   );
-  // }
-
-  if (error) {
-    toast.error("Something Wrong Happened")
-  }
+  const { yachts } = useTopYachts();
 
   return (
     <div className={styles.comp_body}>
@@ -166,8 +153,10 @@ const Home: React.FC = () => {
           >
             {yachts.map((yacht) => (
               <SwiperSlide key={yacht._id} className={styles.swiper_slide} >
-                {/* @ts-ignore */}
-                <YachtCard yacht={yacht} />
+                <ErrorBoundary>
+                  {/* @ts-ignore */}
+                  <YachtCard yacht={yacht} />
+                </ErrorBoundary>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -180,7 +169,7 @@ const Home: React.FC = () => {
         <div className={styles.section_head}>
           Seamless Yacht Distribution Solutions
         </div>
-        <div className={styles.gridBox}>
+        <div className={`${styles.gridBox} ${styles.solutionsGrid}`}>
           {solutionData.map((solution) => (
             <SolutionCard
               key={solution.id}
@@ -189,17 +178,66 @@ const Home: React.FC = () => {
             />
           ))}
         </div>
+        <div className={styles.solutionsSlider}>
+          <Swiper
+            modules={[Autoplay]}
+            slidesPerView="auto"
+            spaceBetween={16}
+            loop={true}
+            autoplay={{ delay: 2200, disableOnInteraction: false, pauseOnMouseEnter: true }}
+            style={{ padding: "20px 0", width: "100%" }}
+          >
+            {solutionData.map((solution) => (
+              <SwiperSlide key={solution.id} className={styles.solution_swiper_slide}>
+                <SolutionCard
+                  heading={solution.heading}
+                  subheading={solution.subheading}
+                />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        </div>
       </div>
       <div className={styles.yatchBox}>
         <div className={styles.section_head}>
           Exclusive Yacht Rentals for Events
         </div>
-        <div className={styles.gridBox}>
-          {eventData.map((event) => (
-            <EventCard key={event.id} imgUrl={event.imgUrl} event={event.event} />
-          ))}
+        <div className={styles.yatch_slider}>
+          <Swiper
+            spaceBetween={50}
+            slidesPerView="auto"
+            pagination={{ clickable: true }}
+            style={{
+              padding: "20px 0",
+              width: "100%",
+            }}
+            breakpoints={{
+              320: {
+                slidesPerView: "auto",
+                spaceBetween: 10
+              },
+              480: {
+                slidesPerView: "auto",
+                spaceBetween: 15
+              },
+              768: {
+                slidesPerView: "auto",
+                spaceBetween: 20
+              },
+              1024: {
+                slidesPerView: "auto",
+                spaceBetween: 40
+              }
+            }}
+          >
+            {eventData.map((event) => (
+              <SwiperSlide key={event.id} className={styles.swiper_slide}>
+                <EventCard imgUrl={event.imgUrl} event={event.event} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
-      </div>            
+      </div>
     </div>
   );
 };

@@ -94,4 +94,9 @@
       align-items: center;
       text-align: center;
     }
+
+    .title {
+      font-size: 28px;
+      margin-bottom: 1rem;
+    }
   }

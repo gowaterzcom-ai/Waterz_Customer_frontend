@@ -73,9 +73,12 @@ const LoginForm = () => {
 
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.formGroup}>
-              <label>Email Address</label>
+              <label htmlFor="login-email">Email Address</label>
               <input
+                id="login-email"
+                name="email"
                 type="email"
+                autoComplete="email"
                 placeholder="Enter your email address"
                 value={formData.email}
                 onChange={(e) => setFormData({...formData, email: e.target.value})}
@@ -84,9 +87,12 @@ const LoginForm = () => {
             </div>
 
             <div className={styles.formGroup}>
-              <label>Password</label>
+              <label htmlFor="login-password">Password</label>
               <input
+                id="login-password"
+                name="password"
                 type="password"
+                autoComplete="current-password"
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={(e) => setFormData({...formData, password: e.target.value})}

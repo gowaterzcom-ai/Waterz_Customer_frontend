@@ -40,7 +40,9 @@ const Booking: React.FC = () => {
         }
       } catch (err: any) {
         dispatch(setLoading(false));
-        setError(err?.message || 'Failed to fetch bookings');
+        const message = err?.message || 'Failed to fetch bookings';
+        setError(message);
+        toast.error(message);
       } finally {
         dispatch(setLoading(false));
       }
@@ -49,10 +51,6 @@ const Booking: React.FC = () => {
     fetchBookings();
   }, []);
 
-  if (error) {
-    toast.error("Something Wrong Happened")
-  }
-  
   if (!currentBookings || !previousBookings) {
     return <div className={styles.error}>No booking data available</div>;
   }

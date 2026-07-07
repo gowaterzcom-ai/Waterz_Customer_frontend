@@ -7,9 +7,9 @@ import chooseStyles from "../../styles/Choose/Choose.module.css";
 import Y2 from "../../assets/Yatch/Y2.svg";
 import { yachtAPI } from "../../api/yachts";
 import YachtCard from "../Layouts/YatchCard";
+import ErrorBoundary from "../ErrorBoundary";
 import { Yacht } from "../../types/yachts";
 import { useYachts } from "../../hooks/useYachts";
-import { toast } from "react-toastify";
 
 // FormData interface
 export interface FormData {
@@ -77,12 +77,7 @@ const Location: React.FC = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [filteredYachts, setFilteredYachts] = useState<Yacht[] | null>(null);
   const [isFiltered, setIsFiltered] = useState(false);
-  const { yachts: allYachts, error: yachtsError } = useYachts();
-
-  // Show error toast if there's an error fetching yachts
-  if (yachtsError) {
-    toast.error("Something Wrong Happened");
-  }
+  const { yachts: allYachts } = useYachts();
 
   // Get today's date for minimum date restriction
   const today = new Date();
@@ -327,7 +322,9 @@ const Location: React.FC = () => {
 
         <div className={chooseStyles.yachtGrid}>
           {displayedYachts?.map((yacht) => (
-            <YachtCard showLoc={true} key={yacht._id} yacht={yacht} />
+            <ErrorBoundary key={yacht._id}>
+              <YachtCard showLoc={true} yacht={yacht} />
+            </ErrorBoundary>
           ))}
         </div>
       </div>

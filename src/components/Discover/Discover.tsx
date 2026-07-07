@@ -1,21 +1,17 @@
 import React from "react";
 import styles from "../../styles/Discover/Discover.module.css"
 import YachtCard from "../Layouts/YatchCard";
+import ErrorBoundary from "../ErrorBoundary";
 // import { IoSearchOutline } from "react-icons/io5";
 // import filt from "../../assets/Icons/filtIcon.svg"
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { useTopYachts } from "../../hooks/useTopYacht";
 import 'swiper/swiper-bundle.css';
 import { Link } from "react-router-dom";
-import { toast } from "react-toastify";
 
 const Discover: React.FC = () => {
-    const { yachts, error } = useTopYachts();
+    const { yachts } = useTopYachts();
 
-    if (error) {
-      toast.error("Something Wrong Happened")
-    }
- 
     return(
         <div className={styles.comp_body}>
             {/* <div className={styles.search_box}>
@@ -74,11 +70,13 @@ const Discover: React.FC = () => {
                 >
                 {yachts.map((yacht) => (
                   <SwiperSlide key={yacht?._id} className={styles.swiper_slide} >
-                      <YachtCard
-                        key={yacht._id}
-                        yacht={yacht}
-                        showLoc={false}
-                      />
+                      <ErrorBoundary>
+                        <YachtCard
+                          key={yacht._id}
+                          yacht={yacht}
+                          showLoc={false}
+                        />
+                      </ErrorBoundary>
                     </SwiperSlide>
                   ))}
                 </Swiper>

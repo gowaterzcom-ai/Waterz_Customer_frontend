@@ -108,18 +108,24 @@ const SignupForm = ({ onSubmit, apiError }: {
           </div>
           <form onSubmit={handleSubmit} className={styles.form}>
             <div className={styles.formGroup}>
-              <label>Name</label>
+              <label htmlFor="signup-name">Name</label>
               <input
+                id="signup-name"
+                name="name"
                 type="text"
+                autoComplete="name"
                 placeholder="Enter your name"
                 value={formData.name}
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
               />
             </div>
             <div className={styles.formGroup}>
-              <label>Email Address</label>
+              <label htmlFor="signup-email">Email Address</label>
               <input
+                id="signup-email"
+                name="email"
                 type="email"
+                autoComplete="email"
                 placeholder="Enter your email address"
                 value={formData.email}
                 onChange={(e) => {
@@ -135,18 +141,24 @@ const SignupForm = ({ onSubmit, apiError }: {
               />
             </div>
             <div className={styles.formGroup}>
-              <label>Phone Number</label>
+              <label htmlFor="signup-phone">Phone Number</label>
               <input
+                id="signup-phone"
+                name="phone"
                 type="tel"
+                autoComplete="tel"
                 placeholder="Enter your phone number"
                 value={formData.phone}
                 onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
               />
             </div>
             <div className={styles.formGroup}>
-              <label>Password</label>
+              <label htmlFor="signup-password">Password</label>
               <input
+                id="signup-password"
+                name="password"
                 type="password"
+                autoComplete="new-password"
                 placeholder="Enter your password"
                 value={formData.password}
                 onChange={(e) => {

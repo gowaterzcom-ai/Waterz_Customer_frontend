@@ -43,7 +43,8 @@ export const getYachtPrice = (
   //   isNonPeak
   // });
 
-  return isNonPeak
-    ? yacht.price[serviceType].nonPeakTime
-    : yacht.price[serviceType].peakTime;
+  const rate = yacht.price?.[serviceType];
+  if (!rate) return 0;
+
+  return isNonPeak ? rate.nonPeakTime : rate.peakTime;
 };

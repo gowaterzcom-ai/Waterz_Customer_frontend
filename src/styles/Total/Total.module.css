@@ -181,4 +181,15 @@
         gap: 2rem;
         align-items: start;
     }
+    .section_head{
+        font-size: 26px;
+        line-height: 34px;
+    }
+}
+
+@media (max-width: 480px){
+    .section_head{
+        font-size: 22px;
+        line-height: 29px;
+    }
 }
