@@ -20,7 +20,6 @@ interface BookingType {
 const Booking: React.FC = () => {
   const [currentBookings, setCurrentBookings] = useState<BookingType[]>([]);
   const [previousBookings, setPreviousBookings] = useState<BookingType[]>([]);
-  const [error, setError] = useState<string | null>(null);
   const dispatch = useAppDispatch();
 
   useEffect(() => {
@@ -41,7 +40,6 @@ const Booking: React.FC = () => {
       } catch (err: any) {
         dispatch(setLoading(false));
         const message = err?.message || 'Failed to fetch bookings';
-        setError(message);
         toast.error(message);
       } finally {
         dispatch(setLoading(false));
