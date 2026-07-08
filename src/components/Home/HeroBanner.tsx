@@ -2,11 +2,16 @@ import React from "react";
 import { ArrowUpRight } from "lucide-react";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import { Swiper, SwiperSlide } from "swiper/react";
+import { Autoplay } from "swiper/modules";
+import "swiper/swiper-bundle.css";
 import styles from "../../styles/Home/HeroBanner.module.css";
 import luxury from "../../assets/Yatch/luxury.jpg";
 import sunset from "../../assets/Yatch/sunset.jpg";
 import corporate from "../../assets/Yatch/corporate.jpg";
 import adventure from "../../assets/Yatch/adventure.jpg";
+import romantic from "../../assets/Yatch/romantic.jpeg";
+import itinerary from "../../assets/Yatch/itinerary.jpg";
 
 const categories = [
   {
@@ -27,6 +32,26 @@ const categories = [
   {
     title: "Dubai",
     image: adventure,
+    href: "/coming-soon",
+  },
+  {
+    title: "Indonesia",
+    image: romantic,
+    href: "/coming-soon",
+  },
+  {
+    title: "Bali",
+    image: itinerary,
+    href: "/coming-soon",
+  },
+  {
+    title: "Singapore",
+    image: luxury,
+    href: "/coming-soon",
+  },
+  {
+    title: "Thailand",
+    image: sunset,
     href: "/coming-soon",
   },
 ];
@@ -73,28 +98,32 @@ const HeroBanner: React.FC = () => {
         </motion.div>
       </motion.section>
 
-      <div className={styles.categoryGrid}>
-        {categories.map((category, index) => (
-          <MotionLink
-            key={category.title}
-            to={category.href}
-            className={styles.categoryCard}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-          >
-            <img
-              src={category.image}
-              alt={category.title}
-              className={styles.categoryImage}
-            />
-            <div className={styles.categoryOverlay} />
-            <h2 className={styles.categoryTitle}>{category.title}</h2>
-            <div className={styles.categoryArrowCorner}>
-              <ArrowUpRight size={18} />
-            </div>
-          </MotionLink>
-        ))}
+      <div className={styles.categorySlider}>
+        <Swiper
+          modules={[Autoplay]}
+          slidesPerView="auto"
+          spaceBetween={20}
+          loop={true}
+          autoplay={{ delay: 2600, disableOnInteraction: false, pauseOnMouseEnter: true }}
+          style={{ padding: "4px 4px 8px" }}
+        >
+          {categories.map((category) => (
+            <SwiperSlide key={category.title} className={styles.categorySlide}>
+              <MotionLink to={category.href} className={styles.categoryCard}>
+                <img
+                  src={category.image}
+                  alt={category.title}
+                  className={styles.categoryImage}
+                />
+                <div className={styles.categoryOverlay} />
+                <h2 className={styles.categoryTitle}>{category.title}</h2>
+                <div className={styles.categoryArrowCorner}>
+                  <ArrowUpRight size={18} />
+                </div>
+              </MotionLink>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );
