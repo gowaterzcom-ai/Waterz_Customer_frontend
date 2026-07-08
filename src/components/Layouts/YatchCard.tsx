@@ -22,7 +22,7 @@ const YachtCard: React.FC<YachtCardProps> = ({ yacht, showLoc=false }) => {
   return (
     <div className={styles.card}>
       <div className={styles.header}>
-        <h2 className={styles.name}>{yacht.name}</h2>
+        <h2 className={styles.name} title={yacht.name}>{yacht.name}</h2>
         {
           showLoc ? <p className={styles.capacity}>Location: {yacht.location}</p> :
           <p className={styles.capacity}>Capacity: {yacht.capacity} people</p>

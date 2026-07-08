@@ -1,5 +1,6 @@
-const URL = "https://www.backend.gowaterz.com"; 
-// const URL = "http://localhost:8000"; //local server
+// In dev, requests go through Vite's proxy (see vite.config.ts) so the
+// browser never makes a cross-origin call to the production backend.
+const URL = import.meta.env.DEV ? "/api-proxy" : "https://www.backend.gowaterz.com";
 const userBaseURL = URL + "/user";
 const signUp = URL + "/auth";
 const customer = URL + "/customer";

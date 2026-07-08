@@ -7,9 +7,9 @@ interface CustomError {
   status: number;
 }
 export const apiClient: AxiosInstance = axios.create({
-  
-  baseURL: 'https://www.backend.gowaterz.com',
-  // baseURL: 'http://localhost:8000', // local server
+  // In dev, paths.ts already points at the Vite proxy (/api-proxy), so
+  // leave baseURL empty to avoid prefixing them with the production host.
+  baseURL: import.meta.env.DEV ? '' : 'https://www.backend.gowaterz.com',
   timeout: 20000,
   withCredentials: true,
   headers: {
@@ -91,8 +91,7 @@ apiClient.interceptors.response.use(
 );
 
 export const nonAuthApiClient: AxiosInstance = axios.create({
-  baseURL: 'https://www.backend.gowaterz.com', 
-  // baseURL: 'http://localhost:8000', // local server
+  baseURL: import.meta.env.DEV ? '' : 'https://www.backend.gowaterz.com',
   timeout: 20000,
   withCredentials: false,
   headers: {
