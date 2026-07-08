@@ -23,6 +23,7 @@ import { setUserDetails } from './redux/slices/userSlice';
 import { authAPI } from './api/auth';
 import GoogleCallback from './components/LoginSignup/GoogleCallback';
 import CompleteProfile from './components/LoginSignup/CompleteProfile';
+import ComingSoon from './components/ComingSoon/ComingSoon';
 
 function App() {
   const location = useLocation();
@@ -73,6 +74,7 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/" element={<MainLayout><Home/></MainLayout>} />
         <Route path="/discover" element={<MainLayout><Discover/></MainLayout>} />
+        <Route path="/coming-soon" element={<MainLayout><ComingSoon/></MainLayout>} />
         {/* <Route path="/bookings" element={<MainLayout><Booking/></MainLayout>} /> */}
         <Route path="/booking/:id" element={<MainLayout><BookingData/></MainLayout>} />
         <Route path="/location" element={<MainLayout><Location/></MainLayout>} />

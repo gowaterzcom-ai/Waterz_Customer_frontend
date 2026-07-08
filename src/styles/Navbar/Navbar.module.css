@@ -2,7 +2,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: #2b6be7;
+    background-color: rgba(255, 255, 255, 0.92);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
     position: fixed;
     top: 0;
     left: 50%;
@@ -13,16 +15,28 @@
     z-index: 1000;
     transition: backdrop-filter 0.3s;
   }
-  
+
   .content {
+    box-sizing: border-box;
     display: flex;
     align-items: center;
-    justify-content: space-between;
     gap: 2rem;
     max-width: 1450px;
     width: 90%;
-    padding: 10px 0;
-    /* background-color: #2b6be7; */
+    padding: 10px 20px;
+    background-color: #EAF1FF;
+  }
+
+  /* Bounded box for brand+nav so it doesn't stretch the full header width,
+     leaving a visible gap before the auth pill floats on the right. */
+  .navBox {
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+    background-color: #2b6be7;
+    padding: 14px 32px 14px 20px;
+    border-radius: 0 0 28px 0;
+    box-shadow: 0 6px 16px rgba(11, 26, 51, 0.12);
   }
 
   .logobox{
@@ -49,7 +63,45 @@
     align-items: center;
     gap: 2rem;
   }
-  
+
+  .desktop_auth {
+    display: flex;
+    align-items: center;
+    margin-left: auto;
+  }
+
+  .authPill {
+    box-sizing: border-box;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 6px 6px 20px;
+    background: #ffffff;
+    color: #1766FF;
+    font-size: 16px;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 999px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+
+  .authPill:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+  }
+
+  .authPillIcon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: #1766FF;
+    color: #ffffff;
+  }
+
   /* Hamburger icon - hidden on larger screens */
   .hamburger {
     display: none;
@@ -103,10 +155,19 @@
     .desktop_nav {
       display: none; /* Hide desktop nav on mobile */
     }
-    
+
+    .desktop_auth {
+      display: none; /* Shown inside the mobile menu instead */
+    }
+
     .hamburger {
       display: block; /* Show hamburger icon on mobile */
+      margin-left: auto;
       margin-right: 1rem;
+    }
+
+    .mobile_auth {
+      margin: 6px 0 0 1rem;
     }
   }
   

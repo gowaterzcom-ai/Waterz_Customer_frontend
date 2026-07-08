@@ -2,16 +2,13 @@ import React from "react";
 import styles from "../../styles/Home/Home.module.css";
 import YachtCard from "../Layouts/YatchCard";
 import ErrorBoundary from "../ErrorBoundary";
-import hh1 from "../../assets/Home/hh1.svg";
-import hh2 from "../../assets/Home/hh2.svg";
-import hh3 from "../../assets/Home/hh3.svg";
+import HeroBanner from "./HeroBanner";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Autoplay } from 'swiper/modules';
 import 'swiper/swiper-bundle.css';
 import SolutionCard from "../Layouts/SolutionCard";
 import EventCard from "../Layouts/EventCard";
 import { useTopYachts } from "../../hooks/useTopYacht";
-import { Link } from "react-router-dom";
 import sunset from "../../assets/Yatch/sunset.jpg";
 import adventure from "../../assets/Yatch/adventure.jpg";
 import corporate from "../../assets/Yatch/corporate.jpg";
@@ -89,36 +86,7 @@ const Home: React.FC = () => {
 
   return (
     <div className={styles.comp_body}>
-      <div className={styles.hero_body}>
-        <div className={styles.hero_left}>
-          <div className={styles.hero_head}>
-            Exclusive Yacht Rentals Available
-          </div>
-          <div className={styles.hero_subhead}>
-            Discover unparalleled luxury and convenience with our 
-            premier yacht booking in India. 
-            Your exclusive adventure awaits on the water.
-          </div>
-          <Link to="/location">
-            <div className={styles.hero_btn}>
-              Book Your Yacht
-            </div>
-          </Link>
-        </div>
-        <div className={styles.hero_right}>
-          <div className={styles.hero_box1}>
-            <div className={styles.hero_imgbox}>
-              <img src={hh1} className={styles.hh} alt="Yacht view 1" />
-            </div>
-            <div className={styles.hero_imgbox}>
-              <img src={hh2} className={styles.hh} alt="Yacht view 2" />
-            </div>
-          </div>
-          <div className={styles.hero_box2}>
-            <img src={hh3} className={styles.hh2} alt="Yacht view 3" />
-          </div>
-        </div>
-      </div>
+      <HeroBanner />
       <div className={styles.yatchBox}>
         <div className={styles.section_head}>
           Yacht Near You

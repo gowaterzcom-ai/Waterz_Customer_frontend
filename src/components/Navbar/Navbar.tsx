@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from "react";
+import { ArrowUpRight } from "lucide-react";
 import styles from "../../styles/Navbar/Navbar.module.css";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../../redux/store/hook";
@@ -55,8 +56,8 @@ const Navbar: React.FC = () => {
   // Toggle menu for mobile
   const toggleMenu = () => setMenuOpen((prev) => !prev);
 
-  // Define the nav items for reuse in desktop and mobile
-  const navItems = (
+  // Plain nav links, shared between desktop and mobile
+  const navLinks = (
     <>
       <Link to="/" onClick={() => setMenuOpen(false)}>
         <div className={styles.item}>Home</div>
@@ -70,33 +71,43 @@ const Navbar: React.FC = () => {
       <Link to="/location" onClick={() => setMenuOpen(false)}>
         <div className={styles.item}>Location</div>
       </Link>
-      {isAuthenticated ? (
-        <div className={styles.account_section}>
-          <Link to="/account" onClick={() => setMenuOpen(false)}>
-            <div className={styles.item}>Account</div>
-          </Link>
-        </div>
-      ) : (
-        <Link to="/signup" onClick={() => setMenuOpen(false)}>
-          <div className={styles.item}>SignUp</div>
-        </Link>
-      )}
     </>
+  );
+
+  // Account/SignUp call-to-action, styled as a standalone pill button
+  const authAction = isAuthenticated ? (
+    <Link to="/account" className={styles.authPill} onClick={() => setMenuOpen(false)}>
+      <span>Account</span>
+      <span className={styles.authPillIcon}>
+        <ArrowUpRight size={16} />
+      </span>
+    </Link>
+  ) : (
+    <Link to="/signup" className={styles.authPill} onClick={() => setMenuOpen(false)}>
+      <span>SignUp</span>
+      <span className={styles.authPillIcon}>
+        <ArrowUpRight size={16} />
+      </span>
+    </Link>
   );
 
   return (
     <header className={styles.comp_body}>
       <div className={styles.content}>
-        <div className={styles.brand}>
-          <Link to="/">
-            {/* <div className={styles.logobox}> */}
-                <img src={logo} width="100%" style={{paddingTop:"8px"}} alt="GoWaterz home" />
-            {/* </div> */}
-          </Link>
+        <div className={styles.navBox}>
+          <div className={styles.brand}>
+            <Link to="/">
+              {/* <div className={styles.logobox}> */}
+                  <img src={logo} width="100%" style={{paddingTop:"8px"}} alt="GoWaterz home" />
+              {/* </div> */}
+            </Link>
+          </div>
+
+          {/* Desktop Navigation */}
+          <nav className={styles.desktop_nav} aria-label="Main">{navLinks}</nav>
         </div>
 
-        {/* Desktop Navigation */}
-        <nav className={styles.desktop_nav} aria-label="Main">{navItems}</nav>
+        <div className={styles.desktop_auth}>{authAction}</div>
 
         {/* Hamburger icon for mobile */}
         <div
@@ -121,7 +132,8 @@ const Navbar: React.FC = () => {
       {/* Mobile Navigation Menu */}
       {menuOpen && (
         <nav ref={menuRef} className={styles.mobile_menu} aria-label="Mobile">
-          {navItems}
+          {navLinks}
+          <div className={styles.mobile_auth}>{authAction}</div>
         </nav>
       )}
     </header>

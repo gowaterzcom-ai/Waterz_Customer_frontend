@@ -1,0 +1,141 @@
+.heroWrap {
+    box-sizing: border-box;
+    width: 100%;
+    background: #EAF1FF;
+    /* Flat top so this card reads as a direct continuation of the fixed
+       nav bar above it rather than a floating card with a gap. */
+    border-radius: 0 0 32px 32px;
+    padding: 4px;
+}
+
+.heroContent {
+    box-sizing: border-box;
+    width: 100%;
+    padding: 5rem 1.5rem 3.5rem;
+    text-align: center;
+}
+
+.heroHeading {
+    margin: 0 0 1.25rem;
+    font-size: clamp(28px, 6vw, 64px);
+    font-weight: 500;
+    line-height: 1.15;
+    letter-spacing: 0.01em;
+    color: #0b1a33;
+}
+
+.headingAccent {
+    background: linear-gradient(90deg, #1766FF 0%, #2B6BE7 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.heroSub {
+    margin: 0 auto;
+    max-width: 46rem;
+    font-size: clamp(15px, 1.6vw, 19px);
+    line-height: 1.6;
+    color: #4d6167;
+}
+
+.heroBtn {
+    box-sizing: border-box;
+    display: inline-block;
+    margin-top: 2rem;
+    padding: 14px 36px;
+    background: #1766FF;
+    color: #ffffff;
+    font-size: clamp(16px, 1.8vw, 20px);
+    font-weight: 400;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.heroBtn:hover {
+    background: #1e4fb0;
+    transform: translateY(-2px);
+}
+
+.categoryGrid {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 1.25rem;
+    margin: 2.5rem 0 1rem;
+}
+
+.categoryCard {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    min-height: 260px;
+    border-radius: 24px;
+    overflow: hidden;
+    text-decoration: none;
+    background: #cfe0ff;
+}
+
+.categoryImage {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+}
+
+.categoryCard:hover .categoryImage {
+    transform: scale(1.08);
+}
+
+.categoryOverlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(8, 20, 40, 0.72) 0%, rgba(8, 20, 40, 0.08) 55%, transparent 100%);
+}
+
+.categoryTitle {
+    box-sizing: border-box;
+    position: relative;
+    z-index: 2;
+    width: 100%;
+    margin: 0;
+    padding: 20px 76px 20px 20px;
+    font-size: clamp(19px, 2.2vw, 26px);
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.categoryArrowCorner {
+    position: absolute;
+    z-index: 3;
+    right: 14px;
+    bottom: 14px;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: #ffffff;
+    color: #1766FF;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
+    transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+
+.categoryCard:hover .categoryArrowCorner {
+    background: #1766FF;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+@media (max-width: 768px) {
+    .heroContent {
+        padding: 3.5rem 1.25rem 2.5rem;
+    }
+    .categoryCard {
+        min-height: 220px;
+    }
+}

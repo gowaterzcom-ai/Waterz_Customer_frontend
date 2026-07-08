@@ -6,7 +6,7 @@
     padding: 0;
     width: 90%;
     max-width: 1450px;
-    margin: 8rem 0 1rem 0;
+    margin: 4rem 0 1rem 0;
 }
 
 .hero_body{
@@ -189,7 +189,7 @@
 /* Font scaling for mobile — desktop sizes (up to 55px headings) are too large below 768px */
 @media (max-width: 768px){
     .comp_body{
-        margin: 6rem 0 1rem 0;
+        margin: 4rem 0 1rem 0;
     }
     .hero_head{
         font-size: 34px;
